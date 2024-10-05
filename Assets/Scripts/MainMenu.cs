@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("BennysTestScene");
+        SceneManager.LoadScene("Level1");
     }
 
     public void Exit()
