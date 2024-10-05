@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,6 +9,7 @@ public class Player : MonoBehaviour
     public GameObject tower;
     private Brick selectedBrick;
     private GameObject shotBullets;
+    private List<ReactivateCollision> _reactivateCollisions = new();
     public float waterLevel = -15.25f;
 
     public event Action OnDeath;
@@ -17,17 +19,37 @@ public class Player : MonoBehaviour
         shotBullets = new GameObject("shotBullets");
     }
 
+    private void Update()
+    {
+        var removeList = new List<ReactivateCollision>();
+
+        foreach (var reactivateCollision in _reactivateCollisions)
+        {
+            reactivateCollision.remainingTime -= Time.deltaTime;
+            if (reactivateCollision.remainingTime <= 0)
+            {
+                Physics2D.IgnoreCollision(GetComponent<Collider2D>(), reactivateCollision.collider, false);
+                removeList.Add(reactivateCollision);
+            }
+        }
+
+        foreach (var remove in removeList)
+        {
+            _reactivateCollisions.Remove(remove);
+        }
+    }
+
     public void Activate(bool activate)
     {
-        if(activate)
+        if (activate)
         {
             float maxY = -Mathf.Infinity;
-            foreach(Brick block in tower.GetComponentsInChildren<Brick>())
+            foreach (Brick block in tower.GetComponentsInChildren<Brick>())
             {
                 var y = block.transform.position.y;
-                if(y > maxY)
+                if (y > maxY)
                 {
-                    maxY = y;
+                    maxY          = y;
                     selectedBrick = block;
                 }
             }
@@ -87,11 +109,25 @@ public class Player : MonoBehaviour
 
         var bullet = selectedBrick.gameObject;
         bullet.GetComponent<SpriteRenderer>().color = Color.white;
-        bullet.transform.position = shootPoint.position;
-        bullet.transform.parent = shotBullets.transform;
+        bullet.transform.position                   = shootPoint.position;
+        bullet.transform.parent                     = shotBullets.transform;
         bullet.GetComponent<Rigidbody2D>().AddForce(direction);
         animator.SetTrigger("Shot");
         selectedBrick = null;
+
+        var joints = bullet.GetComponent<JointRef>();
+        if(joints != null)
+            foreach(var joint in joints.Joints)
+                if(joint != null)
+                    Destroy(joint);
+
+        var bulletCol = bullet.GetComponent<Collider2D>();
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), bulletCol);
+        _reactivateCollisions.Add(new ReactivateCollision
+        {
+            collider      = bulletCol,
+            remainingTime = 1f
+        });
     }
 
     private void Update()
@@ -104,5 +140,11 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Ground"))
             OnDeath?.Invoke();
+    }
+
+    private class ReactivateCollision
+    {
+        public Collider2D collider;
+        public float      remainingTime = 1;
     }
 }
