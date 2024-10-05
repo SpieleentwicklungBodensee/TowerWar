@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
     public  TMP_Text restartText;
     private Player   _player1;
     private Player   _player2;
-    private bool     _gameFinished;
+    public bool     gameFinished;
 
     private Player _currentPlayer;
 
@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
 
         _currentPlayer = _player1;
         _currentPlayer.Activate(true);
-        _gameFinished = false;
+        gameFinished = false;
     }
 
     void Update()
@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour
 
     public void Fire(Vector2 v)
     {
-        if (_gameFinished)
+        if (gameFinished)
         {
             SceneManager.LoadScene("Level1");
             return;
@@ -53,7 +53,7 @@ public class GameController : MonoBehaviour
 
     public void BlockSelection(Vector2 direction)
     {
-        if (_gameFinished)
+        if (gameFinished)
             return;
 
         _currentPlayer.ChangeBlockSelection(direction);
@@ -71,7 +71,7 @@ public class GameController : MonoBehaviour
         winText.text = winner + " wins!";
         winText.gameObject.SetActive(true);
         restartText.gameObject.SetActive(true);
-        _gameFinished = true;
+        gameFinished = true;
         _currentPlayer.Activate(false);
     }
 }

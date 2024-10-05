@@ -51,6 +51,11 @@ public class InputControl : MonoBehaviour
 
     void UpdateUi()
     {
+        directionImagePlayer0.gameObject.SetActive(!gameController.gameFinished);
+        powerSliderPlayer0.gameObject.SetActive(!gameController.gameFinished);
+        directionImagePlayer1.gameObject.SetActive(!gameController.gameFinished);
+        powerSliderPlayer1.gameObject.SetActive(!gameController.gameFinished);
+
         GetDirectionImage().transform.eulerAngles = new Vector3(0, 0, rotation);
         GetPowerSlider().value = power;
     }
