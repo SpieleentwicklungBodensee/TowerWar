@@ -51,17 +51,28 @@ public class InputControl : MonoBehaviour
 
     void UpdateUi()
     {
+        directionImagePlayer0.gameObject.SetActive(!gameController.gameFinished);
+        powerSliderPlayer0.gameObject.SetActive(!gameController.gameFinished);
+        directionImagePlayer1.gameObject.SetActive(!gameController.gameFinished);
+        powerSliderPlayer1.gameObject.SetActive(!gameController.gameFinished);
+
         GetDirectionImage().transform.eulerAngles = new Vector3(0, 0, rotation);
         GetPowerSlider().value = power;
     }
 
     public void TargetDirection(InputAction.CallbackContext context)
     {
+        if(!gameController.blockSelected)
+            return;
+
         delta = context.ReadValue<float>();
     }
 
     public void Fire(InputAction.CallbackContext context)
     {
+        if(!gameController.blockSelected)
+            return;
+
         if(context.ReadValue<float>() != 0)
         {
             if(!fire)
@@ -88,9 +99,15 @@ public class InputControl : MonoBehaviour
         }
     }
 
+    public void Enter(InputAction.CallbackContext context)
+    {
+        if(!gameController.blockSelected && !context.ReadValue<bool>())
+            gameController.blockSelected = true;
+    }
+
     public void BlockSelection(InputAction.CallbackContext context)
     {
-        if(!gameController)
+        if(gameController.blockSelected)
             return;
 
         Vector2 direction = context.ReadValue<Vector2>();

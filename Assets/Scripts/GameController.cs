@@ -4,11 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public  TMP_Text   winText;
-    public  GameObject bulletPrefab;
-    private Player     _player1;
-    private Player     _player2;
-    private bool       gameFinished;
+    public  TMP_Text winText;
+    public  TMP_Text restartText;
+    private Player   _player1;
+    private Player   _player2;
+    public bool     gameFinished;
+    public bool     blockSelected;
 
     private Player _currentPlayer;
 
@@ -21,10 +22,12 @@ public class GameController : MonoBehaviour
         _player2.OnDeath += () => GameOver("Player 1");
 
         winText.gameObject.SetActive(false);
+        restartText.gameObject.SetActive(false);
 
         _currentPlayer = _player1;
         _currentPlayer.Activate(true);
         gameFinished = false;
+        blockSelected = false;
     }
 
     void Update()
@@ -40,8 +43,11 @@ public class GameController : MonoBehaviour
 
     public void Fire(Vector2 v)
     {
-        if(gameFinished)
+        if (gameFinished)
+        {
+            SceneManager.LoadScene("Level1");
             return;
+        }
 
         _currentPlayer.Shoot(v);
         SwitchPlayer();
@@ -49,7 +55,7 @@ public class GameController : MonoBehaviour
 
     public void BlockSelection(Vector2 direction)
     {
-        if(gameFinished)
+        if (gameFinished)
             return;
 
         _currentPlayer.ChangeBlockSelection(direction);
@@ -60,12 +66,14 @@ public class GameController : MonoBehaviour
         _currentPlayer.Activate(false);
         _currentPlayer = _currentPlayer == _player1 ? _player2 : _player1;
         _currentPlayer.Activate(true);
+        blockSelected = false;
     }
 
     void GameOver(string winner)
     {
         winText.text = winner + " wins!";
         winText.gameObject.SetActive(true);
+        restartText.gameObject.SetActive(true);
         gameFinished = true;
         _currentPlayer.Activate(false);
     }
