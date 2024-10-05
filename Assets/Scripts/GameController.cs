@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
         winText.gameObject.SetActive(false);
 
         _currentPlayer = _player1;
+        _currentPlayer.Activate(true);
     }
 
     void Update()
@@ -32,14 +33,20 @@ public class GameController : MonoBehaviour
 
     public void Fire(Vector2 v)
     {
-        var bullet = Instantiate(bulletPrefab);
-        _currentPlayer.Shoot(v, bullet);
+        _currentPlayer.Shoot(v);
         SwitchPlayer();
+    }
+
+    public void BlockSelection(Vector2 direction)
+    {
+        _currentPlayer.ChangeBlockSelection(direction);
     }
 
     void SwitchPlayer()
     {
+        _currentPlayer.Activate(false);
         _currentPlayer = _currentPlayer == _player1 ? _player2 : _player1;
+        _currentPlayer.Activate(true);
     }
 
     void GameOver(string winner)

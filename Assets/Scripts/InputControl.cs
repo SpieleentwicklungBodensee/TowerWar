@@ -61,4 +61,11 @@ public class InputControl : MonoBehaviour
             fire = false;
         }
     }
+
+    public void BlockSelection(InputAction.CallbackContext context)
+    {
+        Vector2 direction = context.ReadValue<Vector2>();
+        if(gameController)
+            gameController.BlockSelection(direction);
+    }
 }
