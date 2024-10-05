@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -30,6 +31,17 @@ public class TowerJoint : MonoBehaviour
                 continue;
             
             var joint = transform.AddComponent<FixedJoint2D>();
+
+            if (join.fixAnchor)
+            {
+                _ref.Joints.Add(joint);
+                joint.breakForce = breakingForce;
+                joint.breakTorque = breakingTorque;
+                joint.anchor = LocalToRbSpace(join.anchorLocalSpace);
+                joint.breakAction = JointBreakAction2D.Destroy;
+                join.Joint = joint;
+                continue;
+            }
                 
             joint.breakForce = breakingForce;
             joint.breakTorque = breakingTorque;
@@ -42,7 +54,8 @@ public class TowerJoint : MonoBehaviour
 
             if (!jointRef)
                 jointRef = join.connectedBody.transform.AddComponent<JointRef>();
-                
+
+            join.Joint = joint;
             jointRef.Joints.Add(joint);
             _ref.Joints.Add(joint);
         }
@@ -55,7 +68,18 @@ public class TowerJoint : MonoBehaviour
             
         foreach (var jd in joins)
         {
-            Gizmos.color = Color.yellow;
+            if (!jd.connectedBody && !jd.fixAnchor)
+            {
+                if (!Application.isPlaying)
+                {
+                    Gizmos.color = Color.grey;
+                    Gizmos.DrawSphere(transform.TransformPoint(jd.anchorLocalSpace), 0.1f);
+                }
+                
+                continue;
+            }
+            
+            Gizmos.color = (!Application.isPlaying || jd.Joint) ? Color.yellow : Color.red;
             Gizmos.DrawSphere(transform.TransformPoint(jd.anchorLocalSpace), 0.1f);
             //Gizmos.DrawSphere(_rb.GetRelativePoint(LocalToRbSpace(jd.anchorLocalSpace)), 0.1f);
         }
@@ -80,5 +104,8 @@ public class TowerJoint : MonoBehaviour
         /// Connects the anchor to a fixed point in space instead of a rigidbody
         /// </summary>
         public bool fixAnchor;
+
+
+        [NonSerialized] [CanBeNull] public Joint2D Joint;
     }
 }
