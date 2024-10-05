@@ -11,6 +11,13 @@ namespace PrototypeF
 
         public float breakingForce;
         public float breakingTorque;
+        
+        private Rigidbody2D _rb;
+
+        private void Awake()
+        {
+            _rb = GetComponent<Rigidbody2D>();
+        }
 
         private void Start()
         {
@@ -21,9 +28,26 @@ namespace PrototypeF
                 joint.breakTorque = breakingTorque;
                 joint.connectedBody = join.connectedBody;
                 joint.breakAction = JointBreakAction2D.Destroy;
-                joint.anchor = join.anchorLocalSpace;
+                joint.anchor = LocalToRbSpace(join.anchorLocalSpace);
                 joint.autoConfigureConnectedAnchor = true;
             }
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (!_rb)
+                return;
+            
+            foreach (var jd in joins)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawSphere(_rb.GetRelativePoint(LocalToRbSpace(jd.anchorLocalSpace)), 0.1f);
+            }
+        }
+
+        private Vector2 LocalToRbSpace(Vector2 localPosition)
+        {
+            return new Vector2(localPosition.x * transform.localScale.x, localPosition.y * transform.localScale.y);
         }
 
         [Serializable]
