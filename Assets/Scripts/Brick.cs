@@ -1,11 +1,11 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
-    public float minForce = 50;
-    public float forceToBreak = 1000;
+    public event Action OnRemoveFromTower;
+    public float        minForce     = 50;
+    public float        forceToBreak = 1000;
 
     private float _damagePoints;
 
@@ -34,5 +34,14 @@ public class Brick : MonoBehaviour
     private void OnMouseDown()
     {
         OnClick?.Invoke(this);
+    }
+
+    void Update()
+    {
+        if (transform.position.y < -14)
+        {
+            OnRemoveFromTower?.Invoke();
+            OnRemoveFromTower = null;
+        }
     }
 }
