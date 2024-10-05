@@ -650,7 +650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joins:
   - connectedBody: {fileID: 59595921}
-    anchorLocalSpace: {x: 0, y: 1}
+    anchorLocalSpace: {x: 0, y: 0.5}
   breakingForce: 1000
   breakingTorque: 1000
 --- !u!1 &618542290
@@ -820,37 +820,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.374, y: -0.671, z: 0}
   m_LocalScale: {x: 2.0238, y: 1.6633, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &687099609
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 687099610}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &687099610
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 687099609}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.83, y: -0.18, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1311,9 +1280,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joins:
   - connectedBody: {fileID: 59595921}
-    anchorLocalSpace: {x: 0, y: -1}
+    anchorLocalSpace: {x: 0, y: -0.5}
   - connectedBody: {fileID: 246255732}
-    anchorLocalSpace: {x: 0, y: 1}
+    anchorLocalSpace: {x: 0, y: 0.5}
   breakingForce: 200
   breakingTorque: 1000
 --- !u!114 &1495254266
@@ -1653,7 +1622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joins:
   - connectedBody: {fileID: 59595921}
-    anchorLocalSpace: {x: 0, y: 1}
+    anchorLocalSpace: {x: 0, y: 0.5}
   breakingForce: 1000
   breakingTorque: 1000
 --- !u!1 &2029390534
@@ -1691,9 +1660,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joins:
   - connectedBody: {fileID: 59595921}
-    anchorLocalSpace: {x: 0, y: -1}
+    anchorLocalSpace: {x: 0, y: -0.5}
   - connectedBody: {fileID: 246255732}
-    anchorLocalSpace: {x: 0, y: 1}
+    anchorLocalSpace: {x: 0, y: 0.5}
   breakingForce: 200
   breakingTorque: 1000
 --- !u!114 &2029390536
@@ -2033,4 +2002,3 @@ SceneRoots:
   - {fileID: 882621969}
   - {fileID: 2060151346}
   - {fileID: 618542295}
-  - {fileID: 687099610}
