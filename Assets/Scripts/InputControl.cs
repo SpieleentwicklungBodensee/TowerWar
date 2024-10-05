@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.InputSystem;
 using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class InputControl : MonoBehaviour
 {
@@ -56,7 +54,7 @@ public class InputControl : MonoBehaviour
             if(gameController)
             {
                 Vector2 dir = new Vector2((float)Math.Cos(rotation * Math.PI/180), (float)Math.Sin(rotation * Math.PI/180));
-                gameController.Fire(dir * (power + 0.2f) * 1000.0f);
+                gameController.Fire(dir * (power + 0.2f) * 10000.0f);
             }
             fire = false;
         }
