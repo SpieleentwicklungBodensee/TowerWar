@@ -49,8 +49,6 @@ public class Player : MonoBehaviour
         Brick brick = null;
         foreach (Brick block in tower.GetComponentsInChildren<Brick>())
         {
-            block.OnClick           =  SelectBlock;
-            block.OnRemoveFromTower += () => RemoveBlockFromTower(block.gameObject);
             var y = block.transform.position.y;
             if (y > maxY)
             {
@@ -64,14 +62,13 @@ public class Player : MonoBehaviour
 
     public void Activate(bool activate)
     {
+        foreach (Brick block in tower.GetComponentsInChildren<Brick>())
+            block.OnClick =  activate? SelectBlock : null;
+
         if (activate)
         {
-            float maxY = -Mathf.Infinity;
             foreach (Brick block in tower.GetComponentsInChildren<Brick>())
-            {
-                block.OnClick           =  SelectBlock;
                 block.OnRemoveFromTower += () => RemoveBlockFromTower(block.gameObject);
-            }
 
             findInitialBlock();
         }
