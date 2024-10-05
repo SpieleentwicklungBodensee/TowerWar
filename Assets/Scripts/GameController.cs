@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public  GameObject bulletPrefab;
     private Player     _player1;
     private Player     _player2;
+    private bool       gameFinished;
 
     private Player _currentPlayer;
 
@@ -23,6 +24,7 @@ public class GameController : MonoBehaviour
 
         _currentPlayer = _player1;
         _currentPlayer.Activate(true);
+        gameFinished = false;
     }
 
     void Update()
@@ -33,12 +35,18 @@ public class GameController : MonoBehaviour
 
     public void Fire(Vector2 v)
     {
+        if(gameFinished)
+            return;
+
         _currentPlayer.Shoot(v);
         SwitchPlayer();
     }
 
     public void BlockSelection(Vector2 direction)
     {
+        if(gameFinished)
+            return;
+
         _currentPlayer.ChangeBlockSelection(direction);
     }
 
@@ -53,5 +61,7 @@ public class GameController : MonoBehaviour
     {
         winText.text = winner + " wins!";
         winText.gameObject.SetActive(true);
+        gameFinished = true;
+        _currentPlayer.Activate(false);
     }
 }
