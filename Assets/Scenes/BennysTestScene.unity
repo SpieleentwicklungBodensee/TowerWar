@@ -286,6 +286,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShootUi
       objectReference: {fileID: 0}
+    - target: {fileID: 6197838890789161783, guid: 233b4eda7e2cc69b89f947cdfbcc1279, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 519420034}
     - target: {fileID: 8779396593715415726, guid: 233b4eda7e2cc69b89f947cdfbcc1279, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
