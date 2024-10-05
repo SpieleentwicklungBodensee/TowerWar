@@ -43,6 +43,25 @@ public class Player : MonoBehaviour
             OnDeath?.Invoke();
     }
 
+    void findInitialBlock()
+    {
+        float maxY = -Mathf.Infinity;
+        Brick brick = null;
+        foreach (Brick block in tower.GetComponentsInChildren<Brick>())
+        {
+            block.OnClick           =  SelectBlock;
+            block.OnRemoveFromTower += () => RemoveBlockFromTower(block.gameObject);
+            var y = block.transform.position.y;
+            if (y > maxY)
+            {
+                maxY  = y;
+                brick = block;
+            }
+        }
+
+        SelectBlock(brick);
+    }
+
     public void Activate(bool activate)
     {
         if (activate)
@@ -52,21 +71,16 @@ public class Player : MonoBehaviour
             {
                 block.OnClick           =  SelectBlock;
                 block.OnRemoveFromTower += () => RemoveBlockFromTower(block.gameObject);
-                var y = block.transform.position.y;
-                if (y > maxY)
-                {
-                    maxY          = y;
-                    selectedBrick = block;
-                }
             }
 
-            selectedBrick.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            findInitialBlock();
         }
     }
 
     void RemoveBlockFromTower(GameObject block)
     {
         block.transform.parent = shotBullets.transform;
+        findInitialBlock();
     }
 
     public void ChangeBlockSelection(Vector2 direction)
@@ -86,7 +100,6 @@ public class Player : MonoBehaviour
             if (GameObject.ReferenceEquals(block.gameObject, selectedBrick.gameObject))
                 continue;
 
-
             var dist     = block.transform.position - position;
             var distDir1 = Vector3.Dot(dist, direction3);
             if (distDir1 < 0)
@@ -101,15 +114,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (newBrick != null)
-        {
-            if (selectedBrick != null)
-                selectedBrick.GetComponent<SpriteRenderer>().color = Color.white;
-
-            selectedBrick = newBrick;
-            if (selectedBrick != null)
-                selectedBrick.GetComponent<SpriteRenderer>().color = Color.blue;
-        }
+        SelectBlock(newBrick);
     }
 
 
@@ -149,10 +154,14 @@ public class Player : MonoBehaviour
 
     private void SelectBlock(Brick block)
     {
-        if (selectedBrick == null)
+        if (block == null)
             return;
 
-        selectedBrick.GetComponent<SpriteRenderer>().color = Color.white;
+        if(!block.transform.IsChildOf(tower.transform))
+            return;
+
+        if (selectedBrick != null)
+            selectedBrick.GetComponent<SpriteRenderer>().color = Color.white;
 
         selectedBrick = block;
         if (selectedBrick != null)
