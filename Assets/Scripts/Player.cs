@@ -114,6 +114,12 @@ public class Player : MonoBehaviour
         animator.SetTrigger("Shot");
         selectedBrick = null;
 
+        var joints = bullet.GetComponent<JointRef>();
+        if(joints != null)
+            foreach(var joint in joints.Joints)
+                if(joint != null)
+                    Destroy(joint);
+
         var bulletCol = bullet.GetComponent<Collider2D>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), bulletCol);
         _reactivateCollisions.Add(new ReactivateCollision
