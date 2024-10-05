@@ -101,7 +101,7 @@ public class InputControl : MonoBehaviour
 
     public void Enter(InputAction.CallbackContext context)
     {
-        if(!gameController.blockSelected && !context.ReadValue<bool>())
+        if(!gameController.blockSelected && context.ReadValue<float>() != 0)
             gameController.blockSelected = true;
     }
 
