@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public GameObject tower;
     private Brick selectedBrick;
     private GameObject shotBullets;
+    public float waterLevel = -15.25f;
 
     public event Action OnDeath;
 
@@ -91,6 +92,12 @@ public class Player : MonoBehaviour
         bullet.GetComponent<Rigidbody2D>().AddForce(direction);
         animator.SetTrigger("Shot");
         selectedBrick = null;
+    }
+
+    private void Update()
+    {
+        if (transform.position is { x: > 50 or < -50 } or { y: < -50 } || transform.position.y < waterLevel)
+            OnDeath?.Invoke();
     }
 
     void OnCollisionEnter2D(Collision2D col)
