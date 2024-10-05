@@ -187,6 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minForce: 5
   forceToBreak: 100
+  explosionPrefab: {fileID: 7635598579890913038, guid: f53727958ee594d2ea4564752ac7c65d, type: 3}
 --- !u!114 &7717148177984931337
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class Brick : MonoBehaviour
     public event Action OnRemoveFromTower;
     public float        minForce     = 50;
     public float        forceToBreak = 1000;
+    public GameObject   explosionPrefab;
 
     private float _damagePoints;
 
@@ -27,6 +28,11 @@ public class Brick : MonoBehaviour
 
         if (_damagePoints < 0)
         {
+            if (explosionPrefab)
+            {
+                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            }
+            
             Destroy(gameObject);
         }
     }
