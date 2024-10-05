@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2583105613325710142}
   - component: {fileID: 8771261462620454772}
   - component: {fileID: 4753742726140541150}
+  - component: {fileID: -951186181647813832}
   m_Layer: 0
   m_Name: WoodBeam 4m
   m_TagString: Untagged
@@ -206,3 +207,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8228a746ef305549aa5c9f4fe5ee15e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-951186181647813832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7583018355934321153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52aa6aa1cf62af941a76a287613db862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterLevel: -15
+  airDrag: 0
+  waterDrag: 0.5
+  updraftForce: 20
