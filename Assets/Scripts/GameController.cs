@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     private Player   _player1;
     private Player   _player2;
     public bool     gameFinished;
+    public bool     blockSelected;
 
     private Player _currentPlayer;
 
@@ -26,6 +27,7 @@ public class GameController : MonoBehaviour
         _currentPlayer = _player1;
         _currentPlayer.Activate(true);
         gameFinished = false;
+        blockSelected = false;
     }
 
     void Update()
@@ -64,6 +66,7 @@ public class GameController : MonoBehaviour
         _currentPlayer.Activate(false);
         _currentPlayer = _currentPlayer == _player1 ? _player2 : _player1;
         _currentPlayer.Activate(true);
+        blockSelected = false;
     }
 
     void GameOver(string winner)
