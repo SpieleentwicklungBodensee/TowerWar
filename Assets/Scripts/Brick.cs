@@ -8,22 +8,21 @@ public class Brick : MonoBehaviour
     public float forceToBreak = 1000;
 
     private float _damagePoints;
-    
+
     private void Start()
     {
         _damagePoints = forceToBreak;
     }
-    
+
     [NonSerialized] public Action<Brick> OnClick;
-    
+
     private void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("Incoming rigidbody: " + col.rigidbody.name);
         var force = col.relativeVelocity.magnitude * col.rigidbody.mass;
 
         if (force < minForce)
             return;
-        
+
         _damagePoints -= force;
 
         if (_damagePoints < 0)

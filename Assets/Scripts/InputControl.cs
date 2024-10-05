@@ -68,12 +68,9 @@ public class InputControl : MonoBehaviour
         delta = context.ReadValue<float>();
     }
 
-    public void Fire(InputAction.CallbackContext context)
+    void Fire(bool pressed)
     {
-        if(!gameController.blockSelected)
-            return;
-
-        if(context.ReadValue<float>() != 0)
+        if(pressed)
         {
             if(!fire)
             {
@@ -99,9 +96,12 @@ public class InputControl : MonoBehaviour
         }
     }
 
-    public void Enter(InputAction.CallbackContext context)
+    public void PrimaryAction(InputAction.CallbackContext context)
     {
-        if(!gameController.blockSelected && context.ReadValue<float>() != 0)
+        bool pressed = context.ReadValue<float>() != 0;
+        if(gameController.blockSelected)
+            Fire(pressed);
+        else if(!pressed)
             gameController.blockSelected = true;
     }
 

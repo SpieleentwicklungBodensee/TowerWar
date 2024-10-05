@@ -449,7 +449,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6197838890789161783}
         m_TargetAssemblyTypeName: InputControl, Assembly-CSharp
-        m_MethodName: Fire
+        m_MethodName: PrimaryAction
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -478,19 +478,7 @@ MonoBehaviour:
     m_ActionId: 49ae3290-75c5-427e-be84-c2f7c5d7d3c2
     m_ActionName: ShootActionMap/BlockSelection[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6197838890789161783}
-        m_TargetAssemblyTypeName: InputControl, Assembly-CSharp
-        m_MethodName: Enter
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 5bccb3fd-b515-4d84-a413-3821fe60f891
     m_ActionName: ShootActionMap/Enter[/Keyboard/enter]
   m_NeverAutoSwitchControlSchemes: 0
