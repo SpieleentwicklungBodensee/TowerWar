@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
             float maxY = -Mathf.Infinity;
             foreach (Brick block in tower.GetComponentsInChildren<Brick>())
             {
+                block.OnClick = SelectBlock;
                 var y = block.transform.position.y;
                 if (y > maxY)
                 {
@@ -137,6 +138,18 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Ground"))
             OnDeath?.Invoke();
+    }
+
+    private void SelectBlock(Brick block)
+    {
+        if(selectedBrick == null)
+            return;
+        
+        selectedBrick.GetComponent<SpriteRenderer>().color = Color.white;
+
+        selectedBrick = block;
+        if(selectedBrick != null)
+            selectedBrick.GetComponent<SpriteRenderer>().color = Color.blue;
     }
 
     private class ReactivateCollision

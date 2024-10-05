@@ -22,8 +22,8 @@ public class PhysTest : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (!_hasBeenDragged)
-            Destroy(gameObject);
+        //if (!_hasBeenDragged)
+        //    Destroy(gameObject);
 
         if (_dragObject)
         {
