@@ -1,0 +1,32 @@
+Schießen
+- UI erstellen
+- Block abfeuern
+- Block Kollision
+    - Reine Physik Kollision? Hitpoints? Explosion?
+
+Spielablauf
+- Rundenmodus
+    - Logik
+    - UI erstellen
+- Sieg Bedingung
+    - Spielfigur (evtl. mit Schale oder Gerüst in dem sie steht)
+    - Bei Kollision mit Boden hat Spieler verloren
+
+Map
+- Boden
+    - Kollisions Logik mit Spieler
+- Hintergrund
+- Evtl. noch mehr Elemente wie Sonne, Wolken, etc...
+
+Turm
+- Blöcke erstellen (Stein, Holz, etc. verschiedene Größen)
+- Turm bauen und Blöcke verbinden
+- Block Auswahl (zum schießen)
+    - Maus oder Tastatur?
+
+Menü
+- Spiel starten
+- Spiel beenden
+
+Steuerung
+- Maus / Tastatur / Gamepad
