@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
         {
             _reactivateCollisions.Remove(remove);
         }
+        
+        if (transform.position is { x: > 50 or < -50 } or { y: < -50 } || transform.position.y < waterLevel)
+            OnDeath?.Invoke();
     }
 
     public void Activate(bool activate)
@@ -128,12 +131,6 @@ public class Player : MonoBehaviour
             collider      = bulletCol,
             remainingTime = 1f
         });
-    }
-
-    private void Update()
-    {
-        if (transform.position is { x: > 50 or < -50 } or { y: < -50 } || transform.position.y < waterLevel)
-            OnDeath?.Invoke();
     }
 
     void OnCollisionEnter2D(Collision2D col)
