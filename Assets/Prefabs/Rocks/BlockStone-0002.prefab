@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2553332696796376977}
   - component: {fileID: 9007458187994647353}
   - component: {fileID: 4699675121511873166}
-  - component: {fileID: 3214742060894716014}
+  - component: {fileID: 4376013333247530419}
   m_Layer: 0
   m_Name: BlockStone-0002
   m_TagString: Untagged
@@ -159,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3214742060894716014
+--- !u!114 &4376013333247530419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,6 +168,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3216608511402097783}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8228a746ef305549aa5c9f4fe5ee15e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2846f9b941957a941818f6b0886e5b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

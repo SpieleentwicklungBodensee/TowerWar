@@ -36,11 +36,13 @@ public class InputControl : MonoBehaviour
 
     public void TargetDirection(InputAction.CallbackContext context)
     {
+        Debug.Log("Hi!");
         delta = context.ReadValue<float>();
     }
 
     public void Fire(InputAction.CallbackContext context)
     {
+        Debug.Log("Hi!");
         if(context.ReadValue<float>() != 0)
         {
             if(!fire)
