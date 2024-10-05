@@ -7,7 +7,7 @@ namespace PrototypeF
 {
     public class TowerJoint : MonoBehaviour
     {
-        public List<JoinDefinition> joins;
+        public List<JoinDefinition> joins = new();
 
         public float breakingForce;
         public float breakingTorque;
@@ -49,6 +49,10 @@ namespace PrototypeF
         private Vector2 LocalToRbSpace(Vector2 localPosition)
         {
             return new Vector2(localPosition.x * transform.localScale.x, localPosition.y * transform.localScale.y);
+        }
+
+        private void OnJointBreak2D(Joint2D brokenJoint)
+        {
         }
 
         [Serializable]
