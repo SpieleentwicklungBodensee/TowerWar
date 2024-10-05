@@ -13,6 +13,7 @@ public class InputControl : MonoBehaviour
     public Image directionImage;
     public Slider powerSlider;
     public GameController gameController;
+    Vector2 currentBlockSelection;
 
     // Start is called before the first frame update
     void Start()
@@ -64,8 +65,13 @@ public class InputControl : MonoBehaviour
 
     public void BlockSelection(InputAction.CallbackContext context)
     {
+        if(!gameController)
+            return;
+
         Vector2 direction = context.ReadValue<Vector2>();
-        if(gameController)
-            gameController.BlockSelection(direction);
+        if(direction.magnitude < 0.7 && currentBlockSelection.magnitude > 0.8)
+            gameController.BlockSelection(currentBlockSelection.normalized);
+
+        currentBlockSelection = direction;
     }
 }

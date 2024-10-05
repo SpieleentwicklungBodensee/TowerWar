@@ -37,12 +37,53 @@ public class Player : MonoBehaviour
 
     public void ChangeBlockSelection(Vector2 direction)
     {
+        var size = selectedBrick.GetComponent<Collider2D>().bounds.size;
+        var position = selectedBrick.transform.position;
+        position.x += size.x / 2 * direction.x;
+        position.y += size.y / 2 * direction.y;
 
+        float closest = Mathf.Infinity;
+        Brick newBrick = null;
+        Vector3 direction3 = new Vector3(direction.x, direction.y, 0);
+        Vector3 directionRotated3 = new Vector3(-1 * direction.y, direction.x, 0);
+
+        foreach(Brick block in tower.GetComponentsInChildren<Brick>())
+        {
+            if(GameObject.ReferenceEquals(block.gameObject, selectedBrick.gameObject))
+                continue;
+
+
+            var dist = block.transform.position - position;
+            var distDir1 = Vector3.Dot(dist, direction3);
+            if(distDir1 < 0)
+                continue;
+
+            var distDir2 = Vector3.Dot(dist, directionRotated3);
+            var fullDist = new Vector2(distDir1, distDir2).sqrMagnitude;
+            if(fullDist < closest)
+            {
+                closest = fullDist;
+                newBrick = block;
+            }
+        }
+
+        if(newBrick != null)
+        {
+            if(selectedBrick != null)
+                selectedBrick.GetComponent<SpriteRenderer>().color = Color.white;
+
+            selectedBrick = newBrick;
+            if(selectedBrick != null)
+                selectedBrick.GetComponent<SpriteRenderer>().color = Color.blue;
+        }
     }
 
 
     public void Shoot(Vector2 direction)
     {
+        if(selectedBrick == null)
+            return;
+
         var bullet = selectedBrick.gameObject;
         bullet.GetComponent<SpriteRenderer>().color = Color.white;
         bullet.transform.position = shootPoint.position;
