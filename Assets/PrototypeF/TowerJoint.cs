@@ -35,13 +35,14 @@ namespace PrototypeF
 
         private void OnDrawGizmos()
         {
-            if (!_rb)
-                return;
+            //if (!_rb)
+            //    return;
             
             foreach (var jd in joins)
             {
                 Gizmos.color = Color.yellow;
-                Gizmos.DrawSphere(_rb.GetRelativePoint(LocalToRbSpace(jd.anchorLocalSpace)), 0.1f);
+                Gizmos.DrawSphere(transform.TransformPoint(jd.anchorLocalSpace), 0.1f);
+                //Gizmos.DrawSphere(_rb.GetRelativePoint(LocalToRbSpace(jd.anchorLocalSpace)), 0.1f);
             }
         }
 
