@@ -11,11 +11,11 @@ public class InputControl : MonoBehaviour
     float rotation = 0;
     float power = 0;
 
-    public Image directionImagePlayer0;
-    public Slider powerSliderPlayer0;
+    public GameObject directionImagePlayer0;
+    public Image powerSliderPlayer0;
 
-    public Image directionImagePlayer1;
-    public Slider powerSliderPlayer1;
+    public GameObject directionImagePlayer1;
+    public Image powerSliderPlayer1;
 
     public GameController gameController;
     Vector2 currentBlockSelection;
@@ -26,12 +26,12 @@ public class InputControl : MonoBehaviour
 
     }
 
-    Image GetDirectionImage()
+    GameObject GetDirectionImage()
     {
         return (gameController.GetCurrentPlayer() == 0)? directionImagePlayer0 : directionImagePlayer1;
     }
 
-    Slider GetPowerSlider()
+    Image GetPowerSlider()
     {
         return (gameController.GetCurrentPlayer() == 0)? powerSliderPlayer0 : powerSliderPlayer1;
     }
@@ -57,7 +57,7 @@ public class InputControl : MonoBehaviour
         powerSliderPlayer1.gameObject.SetActive(!gameController.gameFinished);
 
         GetDirectionImage().transform.eulerAngles = new Vector3(0, 0, rotation);
-        GetPowerSlider().value = power;
+        GetPowerSlider().fillAmount = power;
     }
 
     public void TargetDirection(InputAction.CallbackContext context)
