@@ -33,6 +33,11 @@ public class GameController : MonoBehaviour
             SceneManager.LoadScene("MainMenu");
     }
 
+    public int GetCurrentPlayer()
+    {
+        return _currentPlayer == _player1 ? 0 : 1;
+    }
+
     public void Fire(Vector2 v)
     {
         if(gameFinished)
