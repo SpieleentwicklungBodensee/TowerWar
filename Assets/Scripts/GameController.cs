@@ -28,13 +28,13 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Escape))
             SceneManager.LoadScene("MainMenu");
+    }
 
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            var bullet = Instantiate(bulletPrefab);
-            _currentPlayer.Shoot(new Vector2(_currentPlayer == _player1 ? 400 : -400, 100), bullet);
-            SwitchPlayer();
-        }
+    public void Fire(Vector2 v)
+    {
+        var bullet = Instantiate(bulletPrefab);
+        _currentPlayer.Shoot(v, bullet);
+        SwitchPlayer();
     }
 
     void SwitchPlayer()
