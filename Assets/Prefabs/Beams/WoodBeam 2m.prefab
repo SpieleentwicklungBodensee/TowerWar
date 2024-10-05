@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 536499225120630645}
   - component: {fileID: 4529655117848554696}
   - component: {fileID: 700428112919332901}
+  - component: {fileID: 6215973082826266757}
   m_Layer: 0
   m_Name: WoodBeam 2m
   m_TagString: Untagged
@@ -193,3 +194,15 @@ MonoBehaviour:
     fixAnchor: 0
   breakingForce: 200
   breakingTorque: 5000
+--- !u!114 &6215973082826266757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4465797137223791396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8228a746ef305549aa5c9f4fe5ee15e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
