@@ -24,9 +24,5 @@ Turm
 - Block Auswahl (zum schießen)
     - Maus oder Tastatur?
 
-Menü
-- Spiel starten
-- Spiel beenden
-
 Steuerung
 - Maus / Tastatur / Gamepad
