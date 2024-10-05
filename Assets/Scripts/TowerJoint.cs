@@ -26,6 +26,9 @@ public class TowerJoint : MonoBehaviour
     {
         foreach (var join in joins)
         {
+            if (!join.connectedBody && !join.fixAnchor)
+                continue;
+            
             var joint = transform.AddComponent<FixedJoint2D>();
                 
             joint.breakForce = breakingForce;
@@ -72,5 +75,10 @@ public class TowerJoint : MonoBehaviour
     {
         public Rigidbody2D connectedBody;
         public Vector2 anchorLocalSpace;
+        
+        /// <summary>
+        /// Connects the anchor to a fixed point in space instead of a rigidbody
+        /// </summary>
+        public bool fixAnchor;
     }
 }
