@@ -3,18 +3,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Animator animator;
+    public Animator  animator;
+    public Transform shootPoint;
     
     public event Action OnDeath; 
 
-    void Update()
+    public void Shoot(Vector2 direction, GameObject bullet)
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-            Shoot();
-    }
-
-    void Shoot()
-    {
+        bullet.transform.position = shootPoint.position;
+        bullet.GetComponent<Rigidbody2D>().AddForce(direction);
         animator.SetTrigger("Shot");
     }
 
