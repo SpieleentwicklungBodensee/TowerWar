@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5460391988923511343}
   - component: {fileID: 2552040187468015143}
   - component: {fileID: 582265617762941337}
+  - component: {fileID: 3531394126348341425}
   m_Layer: 0
   m_Name: BlockWood-0002
   m_TagString: Untagged
@@ -158,3 +159,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &3531394126348341425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568862365540559902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8228a746ef305549aa5c9f4fe5ee15e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
