@@ -1,3 +1,5 @@
+using System.Linq;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +13,8 @@ public class GameController : MonoBehaviour
     public bool     gameFinished;
     public bool     blockSelected;
     public InputControl singlePlayerControl;
+    public CinemachineTargetGroup targetGroup;
+    public  Music        music;
 
     private Player _currentPlayer;
 
@@ -64,6 +68,21 @@ public class GameController : MonoBehaviour
         SwitchPlayer();
     }
 
+    public void StartTrackingStone(Brick stone)
+    {
+        stone.stopTrackingStone = StopTrackingStone;
+        var oldTargets = targetGroup.m_Targets;
+        var newTargets = new CinemachineTargetGroup.Target[oldTargets.Length + 1];
+        oldTargets.CopyTo(newTargets, 0);
+        newTargets[^1] = new CinemachineTargetGroup.Target
+        {
+            target = stone.transform,
+            weight = 1f,
+            radius = 1f
+        };
+        targetGroup.m_Targets = newTargets;
+    }
+
     public void ReloadGame()
     {
         SceneManager.LoadScene("Level1");
@@ -77,11 +96,32 @@ public class GameController : MonoBehaviour
         _currentPlayer.ChangeBlockSelection(direction);
     }
 
+    public void StopTrackingStone(Transform t)
+    {
+        targetGroup.m_Targets = targetGroup.m_Targets.Where(a => a.target != t).ToArray();
+    }
+
     void SwitchPlayer()
     {
         _currentPlayer.Activate(false);
         _currentPlayer = _currentPlayer == _player1 ? _player2 : _player1;
         _currentPlayer.Activate(true);
+
+        for (var i = 0; i < targetGroup.m_Targets.Length; i++)
+        {
+            var target = targetGroup.m_Targets[i];
+            
+            if (target.target == _currentPlayer.transform)
+            {
+                target.weight = 1.2f;
+                targetGroup.m_Targets[i] = target;
+            }
+            else if (target.target == _player1.transform || target.target == _player2.transform)
+            {
+                target.weight = 1f;
+                targetGroup.m_Targets[i] = target;
+            }
+        }
 
         if (singlePlayerControl)
         {
@@ -106,5 +146,7 @@ public class GameController : MonoBehaviour
         _currentPlayer.Activate(false);
         if(AudioManager.Instance != null)
             AudioManager.Instance.PlaySound("death1");
+        
+        music.SetMode(Music.Mode.End);
     }
 }

@@ -160,6 +160,7 @@ public class Player : MonoBehaviour
             return;
 
         var bullet = selectedBrick.gameObject;
+        var brick = selectedBrick;
         bullet.GetComponent<SpriteRenderer>().material = defaultMaterial;
         bullet.transform.position                   = shootPoint.position;
         bullet.transform.parent                     = shotBullets.transform;
@@ -182,6 +183,7 @@ public class Player : MonoBehaviour
             remainingTime = 1f
         });
 
+        FindObjectOfType<GameController>().StartTrackingStone(brick);
 
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlaySound("shoot1");
