@@ -41,6 +41,11 @@ public class GameController : MonoBehaviour
         return _currentPlayer == _player1 ? 0 : 1;
     }
 
+    public Player GetCurrentPlayerAsRef()
+    {
+        return _currentPlayer;
+    }
+
     public void Fire(Vector2 v)
     {
         if (gameFinished)
