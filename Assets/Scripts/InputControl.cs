@@ -45,10 +45,26 @@ public class InputControl : MonoBehaviour
 
     void UpdateUi()
     {
-        directionImagePlayer0.gameObject.SetActive(!gameController.gameFinished);
-        powerSliderPlayer0.gameObject.SetActive(!gameController.gameFinished);
-        directionImagePlayer1.gameObject.SetActive(!gameController.gameFinished);
-        powerSliderPlayer1.gameObject.SetActive(!gameController.gameFinished);
+        if (gameController.gameFinished)
+        {
+            directionImagePlayer0.gameObject.SetActive(!gameController.gameFinished);
+            powerSliderPlayer0.gameObject.SetActive(!gameController.gameFinished);
+            directionImagePlayer1.gameObject.SetActive(!gameController.gameFinished);
+            powerSliderPlayer1.gameObject.SetActive(!gameController.gameFinished);
+        }
+        else
+        {
+            if (gameController.GetCurrentPlayer() == 0)
+            {
+                directionImagePlayer0.gameObject.SetActive(gameController.blockSelected);
+                directionImagePlayer1.gameObject.SetActive(false);
+            }
+            else
+            {
+                directionImagePlayer0.gameObject.SetActive(false);
+                directionImagePlayer1.gameObject.SetActive(gameController.blockSelected);
+            }
+        }
 
         GetDirectionImage().transform.eulerAngles = new Vector3(0, 0, rotation);
         GetPowerSlider().fillAmount = power;
