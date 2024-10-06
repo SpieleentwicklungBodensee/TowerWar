@@ -7,6 +7,8 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject titleScreen;
     public GameObject joinScreen;
+    public GameObject pl1Cam;
+    public GameObject pl2Cam;
     public TextMeshProUGUI joinText;
     
     private PlayerInput _player1Input;
@@ -34,6 +36,7 @@ public class MainMenu : MonoBehaviour
         PlayerInputManager.instance.joinBehavior = PlayerJoinBehavior.JoinPlayersWhenJoinActionIsTriggered;
         PlayerInputManager.instance.EnableJoining();
         PlayerInputManager.instance.onPlayerJoined += PlayerJoined;
+        pl1Cam.SetActive(true);
     }
 
     private void PlayerJoined(PlayerInput playerInput)
@@ -45,6 +48,7 @@ public class MainMenu : MonoBehaviour
             _player1Input = playerInput;
             playerInput.GetComponent<InputControl>().isPlayerOne = true;
             SetJoinTextFor(2);
+            pl2Cam.SetActive(true);
         }
         else
         {
