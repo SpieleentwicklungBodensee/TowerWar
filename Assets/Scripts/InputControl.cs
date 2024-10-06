@@ -111,8 +111,12 @@ public class InputControl : MonoBehaviour
         bool pressed = context.ReadValue<float>() != 0;
         if(gameController.blockSelected)
             Fire(pressed);
-        else if(!pressed)
+        else if (!pressed)
+        {
             gameController.blockSelected = true;
+            if(AudioManager.Instance != null)
+                AudioManager.Instance.PlaySound("select1");
+        }
     }
 
     public void BlockSelection(InputAction.CallbackContext context)
