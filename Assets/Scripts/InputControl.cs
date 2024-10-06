@@ -48,6 +48,9 @@ public class InputControl : MonoBehaviour
             if ((gameController.GetCurrentPlayer() == 0 && isPlayerOne) || (gameController.GetCurrentPlayer() == 1 && !isPlayerOne))
             {
                 directionImage.gameObject.SetActive(gameController.blockSelected);
+
+                if (!gameController.blockSelected)
+                    rotation = isPlayerOne ? 0 : 180;
             }
             else
             {
