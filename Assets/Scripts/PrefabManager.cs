@@ -8,6 +8,7 @@ public class PrefabManager : MonoBehaviour
     public GameObject hitSound1;
     public GameObject hitSound2;
     public GameObject deathSound1;
+    public GameObject selectSound1;
 
     private void Awake()
     {
