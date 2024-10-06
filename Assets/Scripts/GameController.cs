@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     public bool     blockSelected;
     public InputControl singlePlayerControl;
     public CinemachineTargetGroup targetGroup;
+    public  Music        music;
 
     private Player _currentPlayer;
 
@@ -145,5 +146,7 @@ public class GameController : MonoBehaviour
         _currentPlayer.Activate(false);
         if(AudioManager.Instance != null)
             AudioManager.Instance.PlaySound("death1");
+        
+        music.SetMode(Music.Mode.End);
     }
 }
