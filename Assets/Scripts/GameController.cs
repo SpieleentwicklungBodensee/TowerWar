@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     private Player   _player2;
     public bool     gameFinished;
     public bool     blockSelected;
+    public InputControl singlePlayerControl;
 
     private Player _currentPlayer;
 
@@ -26,9 +27,20 @@ public class GameController : MonoBehaviour
 
         _currentPlayer = _player1;
         _currentPlayer.Activate(true);
+        
+        if (singlePlayerControl)
+        {
+            singlePlayerControl.attachedPlayer = _currentPlayer;
+            singlePlayerControl.isPlayerOne = _currentPlayer == _player1;
+            singlePlayerControl.directionImage = _currentPlayer.directionImage;
+            singlePlayerControl.powerSlider = _currentPlayer.powerSlider;
+        }
+        
         gameFinished = false;
         blockSelected = false;
     }
+    
+    public Player Player1 => _player1;
 
     void Update()
     {
@@ -70,6 +82,15 @@ public class GameController : MonoBehaviour
         _currentPlayer.Activate(false);
         _currentPlayer = _currentPlayer == _player1 ? _player2 : _player1;
         _currentPlayer.Activate(true);
+
+        if (singlePlayerControl)
+        {
+            singlePlayerControl.attachedPlayer = _currentPlayer;
+            singlePlayerControl.isPlayerOne = _currentPlayer == _player1;
+            singlePlayerControl.directionImage = _currentPlayer.directionImage;
+            singlePlayerControl.powerSlider = _currentPlayer.powerSlider;
+        }
+        
         blockSelected = false;
     }
 

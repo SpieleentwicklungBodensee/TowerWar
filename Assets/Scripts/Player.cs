@@ -34,7 +34,12 @@ public class Player : MonoBehaviour
         {
             var go = Instantiate(backupInputControl);
             input = go.GetComponent<InputControl>();
-            input.isPlayerOne = isPlayerOne;
+            input.isPlayerOne = !isPlayerOne;
+            gameController.singlePlayerControl = input;
+        }
+        else if (input == gameController.singlePlayerControl)
+        {
+            input.isPlayerOne = true;
         }
         
         input.directionImage = directionImage;
