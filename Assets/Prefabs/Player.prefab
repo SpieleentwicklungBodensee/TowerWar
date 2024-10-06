@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a7cf1f247bbe24cb2b0d13cf7127b4b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -196,6 +196,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 531441685768238351}
   shootPoint: {fileID: 2471690299623731056}
+  tower: {fileID: 0}
+  waterLevel: -15.25
+  highlightMaterial: {fileID: 2100000, guid: 41b71cc3495b5bc46a86633c680861a9, type: 2}
+  defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  isPlayerOne: 1
+  directionImage: {fileID: 0}
+  powerSlider: {fileID: 0}
+  backupInputControl: {fileID: 1191391995509659966, guid: c3b3e62b12265bb40bce993f73e957cf, type: 3}
 --- !u!1 &6276430467123681324
 GameObject:
   m_ObjectHideFlags: 0
