@@ -4,13 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public  TMP_Text winText;
-    public  TMP_Text restartText;
-    private Player   _player1;
-    private Player   _player2;
-    public bool     gameFinished;
-    public bool     blockSelected;
-    public InputControl singlePlayerControl;
+    public  TMP_Text     winText;
+    public  TMP_Text     restartText;
+    private Player       _player1;
+    private Player       _player2;
+    public  bool         gameFinished;
+    public  bool         blockSelected;
+    public  InputControl singlePlayerControl;
+    public  Music        music;
 
     private Player _currentPlayer;
 
@@ -106,5 +107,7 @@ public class GameController : MonoBehaviour
         _currentPlayer.Activate(false);
         if(AudioManager.Instance != null)
             AudioManager.Instance.PlaySound("death1");
+        
+        music.SetMode(Music.Mode.End);
     }
 }
