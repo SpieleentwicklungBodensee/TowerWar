@@ -15,6 +15,7 @@ public class InputControl : MonoBehaviour
 
     public GameObject directionImage;
     public Image powerSlider;
+    public AudioSource powerAudioSource;
 
     public GameController gameController;
     Vector2 currentBlockSelection;
@@ -78,6 +79,7 @@ public class InputControl : MonoBehaviour
             {
                 fire = true;
                 fireStartTime = Time.timeAsDouble;
+                powerAudioSource.Play(0);
             }
         }
         else if(fire)
@@ -89,6 +91,7 @@ public class InputControl : MonoBehaviour
             fire = false;
             rotation = (gameController.GetCurrentPlayer() == 0)? 0 : 180;
             power = 0.0f;
+            powerAudioSource.Stop();
             UpdateUi();
 
             if(gameController)

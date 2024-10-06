@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public GameObject directionImage;
     public Image powerSlider;
     public GameObject backupInputControl;
+    public AudioSource powerAudioSource;
 
     public event Action OnDeath;
 
@@ -42,10 +43,11 @@ public class Player : MonoBehaviour
             input.isPlayerOne = true;
         }
         
-        input.directionImage = directionImage;
-        input.gameController = gameController;
-        input.powerSlider = powerSlider;
-        input.attachedPlayer = this;
+        input.directionImage   = directionImage;
+        input.gameController   = gameController;
+        input.powerSlider      = powerSlider;
+        input.powerAudioSource = powerAudioSource;
+        input.attachedPlayer   = this;
     }
 
     private void Update()
