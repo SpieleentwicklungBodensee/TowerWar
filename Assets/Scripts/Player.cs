@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
         {
             input.isPlayerOne = true;
         }
-        
+
         input.directionImage   = directionImage;
         input.gameController   = gameController;
         input.powerSlider      = powerSlider;
@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
     void RemoveBlockFromTower(GameObject block)
     {
         block.transform.parent = shotBullets.transform;
-        
+
         if (FindObjectOfType<GameController>().GetCurrentPlayer() == (isPlayerOne ? 0 : 1))
             findInitialBlock();
     }
@@ -163,6 +163,7 @@ public class Player : MonoBehaviour
         bullet.GetComponent<SpriteRenderer>().material = defaultMaterial;
         bullet.transform.position                   = shootPoint.position;
         bullet.transform.parent                     = shotBullets.transform;
+        bullet.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         bullet.GetComponent<Rigidbody2D>().AddForce(direction);
         animator.SetTrigger("Shot");
         selectedBrick = null;
@@ -180,8 +181,8 @@ public class Player : MonoBehaviour
             collider      = bulletCol,
             remainingTime = 1f
         });
-        
-        
+
+
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlaySound("shoot1");
     }
