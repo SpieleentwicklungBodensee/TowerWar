@@ -87,6 +87,12 @@ public class Player : MonoBehaviour
 
     public void ChangeBlockSelection(Vector2 direction)
     {
+        if (selectedBrick == null)
+        {
+            findInitialBlock();
+            return;
+        }
+
         var size     = selectedBrick.GetComponent<Collider2D>().bounds.size;
         var position = selectedBrick.transform.position;
         position.x += size.x / 2 * direction.x;
