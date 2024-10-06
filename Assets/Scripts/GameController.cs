@@ -75,10 +75,15 @@ public class GameController : MonoBehaviour
 
     void GameOver(string winner)
     {
+        if(gameFinished)
+            return;
+        
         winText.text = winner + " wins!";
         winText.gameObject.SetActive(true);
         restartText.gameObject.SetActive(true);
         gameFinished = true;
         _currentPlayer.Activate(false);
+        if(AudioManager.Instance != null)
+            AudioManager.Instance.PlaySound("death1");
     }
 }

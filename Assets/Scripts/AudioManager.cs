@@ -27,6 +27,10 @@ public class AudioManager : MonoBehaviour
                 if (PrefabManager.Instance != null)
                     audioSource = Instantiate(PrefabManager.Instance.shootSound1).GetComponent<AudioSource>();
                 break;
+            case "death1":
+                if (PrefabManager.Instance != null)
+                    audioSource = Instantiate(PrefabManager.Instance.deathSound1).GetComponent<AudioSource>();
+                break;
         }
 
         if (audioSource != null)
