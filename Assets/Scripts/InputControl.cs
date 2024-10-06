@@ -96,10 +96,13 @@ public class InputControl : MonoBehaviour
             power = 0.0f;
             powerAudioSource.Stop();
             UpdateUi();
+            var oldDir = directionImage;
 
             if(gameController)
                 gameController.Fire(v);
-
+            
+            // Workaround for solo mode
+            oldDir.gameObject.SetActive(false);
             //rotation = (gameController.GetCurrentPlayer() == 0)? 0 : 180;
         }
     }
