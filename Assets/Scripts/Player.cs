@@ -93,11 +93,8 @@ public class Player : MonoBehaviour
 
     public void Activate(bool activate)
     {
-        if (!activate)
-            
-        
         foreach (Brick block in tower.GetComponentsInChildren<Brick>())
-            block.OnClick =  activate? SelectBlock : null;
+            block.OnClick = activate? SelectBlock : null;
 
         if (activate)
         {
@@ -111,7 +108,9 @@ public class Player : MonoBehaviour
     void RemoveBlockFromTower(GameObject block)
     {
         block.transform.parent = shotBullets.transform;
-        findInitialBlock();
+        
+        if (FindObjectOfType<GameController>().GetCurrentPlayer() == (isPlayerOne ? 0 : 1))
+            findInitialBlock();
     }
 
     public void ChangeBlockSelection(Vector2 direction)
