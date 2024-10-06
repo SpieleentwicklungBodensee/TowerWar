@@ -20,12 +20,6 @@ public class InputControl : MonoBehaviour
     public GameController gameController;
     Vector2 currentBlockSelection;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     GameObject GetDirectionImage()
     {
         return (gameController.GetCurrentPlayer() == 0)? directionImagePlayer0 : directionImagePlayer1;
@@ -98,6 +92,11 @@ public class InputControl : MonoBehaviour
 
     public void PrimaryAction(InputAction.CallbackContext context)
     {
+        if (gameController.gameFinished)
+        {
+            gameController.ReloadGame();
+        }
+
         bool pressed = context.ReadValue<float>() != 0;
         if(gameController.blockSelected)
             Fire(pressed);

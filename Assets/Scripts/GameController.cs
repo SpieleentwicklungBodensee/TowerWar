@@ -43,14 +43,13 @@ public class GameController : MonoBehaviour
 
     public void Fire(Vector2 v)
     {
-        if (gameFinished)
-        {
-            SceneManager.LoadScene("Level1");
-            return;
-        }
-
         _currentPlayer.Shoot(v);
         SwitchPlayer();
+    }
+
+    public void ReloadGame()
+    {
+        SceneManager.LoadScene("Level1");
     }
 
     public void BlockSelection(Vector2 direction)
