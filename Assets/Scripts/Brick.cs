@@ -7,6 +7,7 @@ public class Brick : MonoBehaviour
     public float        minForce     = 50;
     public float        forceToBreak = 1000;
     public GameObject   explosionPrefab;
+    public Action<Transform> stopTrackingStone;
 
     private float _damagePoints;
 
@@ -19,6 +20,13 @@ public class Brick : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
+        if (stopTrackingStone != null)
+        {
+            //Debug.Log("Exit3");
+            stopTrackingStone(transform);
+            stopTrackingStone = null;
+        }
+        
         var force = col.relativeVelocity.magnitude * col.rigidbody.mass;
 
         if (force < minForce)
@@ -52,8 +60,22 @@ public class Brick : MonoBehaviour
 
     void Update()
     {
+        if (stopTrackingStone != null && transform.position is { x: > 20 } or { x: < -32 })
+        {
+            //Debug.Log("Exit1");
+            stopTrackingStone(transform);
+            stopTrackingStone = null;
+        }
+        
         if (transform.position.y < -14)
         {
+            if (stopTrackingStone != null)
+            {
+                //Debug.Log("Exit2");
+                stopTrackingStone(transform);
+                stopTrackingStone = null;
+            }
+            
             OnRemoveFromTower?.Invoke();
             OnRemoveFromTower = null;
         }
