@@ -401,6 +401,8 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
+  - component: {fileID: 519420035}
+  - component: {fileID: 519420036}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -518,6 +520,33 @@ MonoBehaviour:
   restartText: {fileID: 1803220985}
   gameFinished: 0
   blockSelected: 0
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc24cbab65e334deb876b3c03d44b2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootSound1: {fileID: 3673056987588543997, guid: 22f9aeaa27f604b1bbc48fcc3e40d02b, type: 3}
+  hitSound1: {fileID: 6526979027718344670, guid: a4410cd144db34fd0b02cf0f0bfce962, type: 3}
+  hitSound2: {fileID: 6465324729202566263, guid: 51b9985e3bd52498b8740dce77cdc668, type: 3}
+--- !u!114 &519420036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca6a86b2d014823a72ae7f7242d441c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &685824618
 GameObject:
   m_ObjectHideFlags: 0

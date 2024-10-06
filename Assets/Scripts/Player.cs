@@ -146,6 +146,10 @@ public class Player : MonoBehaviour
             collider      = bulletCol,
             remainingTime = 1f
         });
+        
+        
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySound("shoot1");
     }
 
     void OnCollisionEnter2D(Collision2D col)

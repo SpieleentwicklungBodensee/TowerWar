@@ -33,7 +33,15 @@ public class Brick : MonoBehaviour
                 Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             }
             
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlaySound("hit2");
+
             Destroy(gameObject);
+        }
+        else
+        {
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlaySound("hit1", Math.Min(force / forceToBreak + 0.3f, 1.0f));
         }
     }
 
