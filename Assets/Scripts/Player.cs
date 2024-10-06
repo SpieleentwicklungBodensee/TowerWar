@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -13,12 +15,32 @@ public class Player : MonoBehaviour
     public  float                     waterLevel            = -15.25f;
     public Material highlightMaterial;
     public Material defaultMaterial;
+    public bool isPlayerOne;
+    public GameObject directionImage;
+    public Image powerSlider;
+    public GameObject backupInputControl;
 
     public event Action OnDeath;
 
     public void Start()
     {
         shotBullets = new GameObject("shotBullets");
+
+        var inputs = FindObjectsOfType<InputControl>();
+        var gameController = FindObjectOfType<GameController>();
+        var input = inputs.FirstOrDefault(a => a.isPlayerOne == isPlayerOne);
+
+        if (input == null)
+        {
+            var go = Instantiate(backupInputControl);
+            input = go.GetComponent<InputControl>();
+            input.isPlayerOne = isPlayerOne;
+        }
+        
+        input.directionImage = directionImage;
+        input.gameController = gameController;
+        input.powerSlider = powerSlider;
+        input.attachedPlayer = this;
     }
 
     private void Update()

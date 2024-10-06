@@ -11,28 +11,22 @@ public class InputControl : MonoBehaviour
     float rotation = 0;
     float power = 0;
 
-    public GameObject directionImagePlayer0;
-    public Image powerSliderPlayer0;
+    public bool isPlayerOne = true;
 
-    public GameObject directionImagePlayer1;
-    public Image powerSliderPlayer1;
+    public GameObject directionImage;
+    public Image powerSlider;
 
     public GameController gameController;
     Vector2 currentBlockSelection;
 
-    GameObject GetDirectionImage()
-    {
-        return (gameController.GetCurrentPlayer() == 0)? directionImagePlayer0 : directionImagePlayer1;
-    }
-
-    Image GetPowerSlider()
-    {
-        return (gameController.GetCurrentPlayer() == 0)? powerSliderPlayer0 : powerSliderPlayer1;
-    }
+    public Player attachedPlayer;
 
     // Update is called once per frame
     void Update()
     {
+        if (!attachedPlayer)
+            return;
+        
         rotation -= 90 * delta * Time.deltaTime;
 
         if(fire)
@@ -43,35 +37,33 @@ public class InputControl : MonoBehaviour
         UpdateUi();
     }
 
-    void UpdateUi()
+    private void UpdateUi()
     {
         if (gameController.gameFinished)
         {
-            directionImagePlayer0.gameObject.SetActive(!gameController.gameFinished);
-            powerSliderPlayer0.gameObject.SetActive(!gameController.gameFinished);
-            directionImagePlayer1.gameObject.SetActive(!gameController.gameFinished);
-            powerSliderPlayer1.gameObject.SetActive(!gameController.gameFinished);
+            directionImage.gameObject.SetActive(false);
         }
         else
         {
-            if (gameController.GetCurrentPlayer() == 0)
+            if ((gameController.GetCurrentPlayer() == 0 && isPlayerOne) || (gameController.GetCurrentPlayer() == 1 && !isPlayerOne))
             {
-                directionImagePlayer0.gameObject.SetActive(gameController.blockSelected);
-                directionImagePlayer1.gameObject.SetActive(false);
+                directionImage.gameObject.SetActive(gameController.blockSelected);
             }
             else
             {
-                directionImagePlayer0.gameObject.SetActive(false);
-                directionImagePlayer1.gameObject.SetActive(gameController.blockSelected);
+                directionImage.gameObject.SetActive(false);
             }
         }
 
-        GetDirectionImage().transform.eulerAngles = new Vector3(0, 0, rotation);
-        GetPowerSlider().fillAmount = power;
+        directionImage.transform.eulerAngles = new Vector3(0, 0, rotation);
+        powerSlider.fillAmount = power;
     }
 
     public void TargetDirection(InputAction.CallbackContext context)
     {
+        if (!attachedPlayer || gameController.GetCurrentPlayer() != (isPlayerOne ? 0 : 1))
+            return;
+        
         if(!gameController.blockSelected)
             return;
 
@@ -102,12 +94,15 @@ public class InputControl : MonoBehaviour
             if(gameController)
                 gameController.Fire(v);
 
-            rotation = (gameController.GetCurrentPlayer() == 0)? 0 : 180;
+            //rotation = (gameController.GetCurrentPlayer() == 0)? 0 : 180;
         }
     }
 
     public void PrimaryAction(InputAction.CallbackContext context)
     {
+        if (!attachedPlayer || gameController.GetCurrentPlayer() != (isPlayerOne ? 0 : 1))
+            return;
+        
         if (gameController.gameFinished)
         {
             gameController.ReloadGame();
@@ -122,6 +117,9 @@ public class InputControl : MonoBehaviour
 
     public void BlockSelection(InputAction.CallbackContext context)
     {
+        if (!attachedPlayer || gameController.GetCurrentPlayer() != (isPlayerOne ? 0 : 1))
+            return;
+        
         if(gameController.blockSelected)
             return;
 
